@@ -13,16 +13,22 @@ package org.junit.jupiter.migrationsupport.conditions;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.migrationsupport.EnableJUnit4MigrationSupport;
+import org.junit.rules.ExpectedException;
 
 /**
- * Tests for JUnit 4's {@link Ignore @Ignore} support.
+ * Tests for JUnit 4's {@link Ignore @Ignore} support in JUnit Jupiter.
  *
  * @since 5.4
  */
-@ExtendWith(IgnoreCondition.class)
+@EnableJUnit4MigrationSupport
+// @ExtendWith(IgnoreCondition.class)
 class IgnoreAnnotationTests {
+
+	@Rule
+	public ExpectedException exception = ExpectedException.none();
 
 	@Test
 	@Ignore
@@ -40,6 +46,12 @@ class IgnoreAnnotationTests {
 	// @Ignore
 	void notIgnored() {
 		/* no-op */
+	}
+
+	@Test
+	void notIgnoredButUsesExpectedExceptionRule() {
+		exception.expect(RuntimeException.class);
+		throw new RuntimeException("expected");
 	}
 
 }
