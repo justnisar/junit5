@@ -2,6 +2,9 @@
 
 org.junit.jupiter.migrationsupport@${jupiterVersion} automatic
 requires java.base mandated
+provides org.junit.jupiter.api.extension.Extension with org.junit.jupiter.migrationsupport.conditions.[I|i]gnore[C|c]ondition
+contains org.junit.jupiter.migrationsupport
+contains org.junit.jupiter.migrationsupport.conditions
 contains org.junit.jupiter.migrationsupport.rules
 contains org.junit.jupiter.migrationsupport.rules.adapter
 contains org.junit.jupiter.migrationsupport.rules.member
